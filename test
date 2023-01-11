@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+set -x
+
+export TESTDIR=/builds/test
+
+mkdir -p $TESTDIR
+cd $TESTDIR
+
+# it must be able to clone
+git clone --depth 1 https://gitlab.com/fdroid/fdroidserver
+
+# check versions of things, also a good way to know if they run
+fdroid --version
+fdroidserver/fdroid --version
+apksigner version
+
+rm -rf $TESTDIR
